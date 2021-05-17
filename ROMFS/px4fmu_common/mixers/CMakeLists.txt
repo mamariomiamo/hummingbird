@@ -87,4 +87,5 @@ px4_add_romfs_files(
 	zmr250.main.mix
 	TF-AutoG2.main.mix
 	uuv_x.main.mix
+	hummingbird.main.mix
 )
