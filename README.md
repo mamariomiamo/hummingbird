@@ -1,10 +1,27 @@
 # PX4 Drone Autopilot
 
+### ----------------------Hummingbird README----------------------
+
 ### Customized PX4 fimware for flapping wing based on v1.11.3.
 
 ### Mixer file modified: [hummingbird.main.mix](https://github.com/mamariomiamo/hummingbird/blob/31c96af767b84c7bda9e45076743ee5a4e67f52f/ROMFS/px4fmu_common/mixers/hummingbird.main.mix).
 
 ### PX4 mixer logic can be found [here](https://docs.px4.io/master/en/concept/mixing.html).
+
+### Setup quick guide:
+* Step 1: Clone this repo.
+* Step 2: run ```sh git submodule update --init --recursive```.
+* Step 3: run ```sh make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
+* Step 4: plug in the flight controller and flash the firmware.
+
+### Wiring guide:
+* PWM1: Left motor
+* PWM2: Right motor
+* PWM3: Left servo
+* PWM4: Right servo
+
+
+### ----------------------Below are the same as official README----------------------
 
 [![Releases](https://img.shields.io/github/release/PX4/Firmware.svg)](https://github.com/PX4/Firmware/releases) [![DOI](https://zenodo.org/badge/22634/PX4/Firmware.svg)](https://zenodo.org/badge/latestdoi/22634/PX4/Firmware)
 
