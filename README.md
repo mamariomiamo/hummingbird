@@ -1,5 +1,11 @@
 # PX4 Drone Autopilot
 
+### Customized PX4 fimware for flapping wing based on v1.11.3.
+
+### Mixer file modified: [hummingbird.main.mix](https://github.com/mamariomiamo/hummingbird/blob/31c96af767b84c7bda9e45076743ee5a4e67f52f/ROMFS/px4fmu_common/mixers/hummingbird.main.mix).
+
+### PX4 mixer logic can be found [here](https://docs.px4.io/master/en/concept/mixing.html).
+
 [![Releases](https://img.shields.io/github/release/PX4/Firmware.svg)](https://github.com/PX4/Firmware/releases) [![DOI](https://zenodo.org/badge/22634/PX4/Firmware.svg)](https://zenodo.org/badge/latestdoi/22634/PX4/Firmware)
 
 [![Nuttx Targets](https://github.com/PX4/Firmware/workflows/Nuttx%20Targets/badge.svg)](https://github.com/PX4/Firmware/actions?query=workflow%3A%22Nuttx+Targets%22?branch=master) [![SITL Tests](https://github.com/PX4/Firmware/workflows/SITL%20Tests/badge.svg?branch=master)](https://github.com/PX4/Firmware/actions?query=workflow%3A%22SITL+Tests%22)
