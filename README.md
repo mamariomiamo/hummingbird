@@ -10,8 +10,8 @@
 
 ### Setup quick guide:
 * Step 1: Clone this repo.
-* Step 2: run ```sh git submodule update --init --recursive```.
-* Step 3: run ```sh make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
+* Step 2: run ``` git submodule update --init --recursive```.
+* Step 3: run ``` make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
 * Step 4: plug in the flight controller and flash the firmware.
 * Step 5: Download and flash the parameter file [here](https://github.com/mamariomiamo/hummingbird/blob/main/hummingbird.params).
 
