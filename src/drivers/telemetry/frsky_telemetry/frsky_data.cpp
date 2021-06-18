@@ -59,6 +59,8 @@
 #include <uORB/topics/vehicle_global_position.h>
 #include <uORB/topics/vehicle_gps_position.h>
 #include <uORB/topics/vehicle_status.h>
+#include <systemlib/mavlink_log.h>
+#include <uORB/topics/mavlink_log.h>
 
 #include <drivers/drv_hrt.h>
 
@@ -76,7 +78,7 @@ struct frsky_subscription_data_s {
 };
 
 static struct frsky_subscription_data_s *subscription_data = nullptr;
-
+static orb_advert_t mavlink_log_pub = nullptr;
 /**
  * Initializes the uORB subscriptions.
  */
@@ -136,6 +138,10 @@ static void frsky_send_byte(int uart, uint8_t value)
  */
 static void frsky_send_data(int uart, uint8_t id, int16_t data)
 {
+	if(id == FRSKY_ID_FUEL){
+		mavlink_log_warning(&mavlink_log_pub,"reporting battery voltage");
+	}
+	mavlink_log_warning(&mavlink_log_pub,"reporting battery voltage in frsky data");
 	/* Cast data to unsigned, because signed shift might behave incorrectly */
 	uint16_t udata = data;
 

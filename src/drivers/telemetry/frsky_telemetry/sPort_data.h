@@ -83,6 +83,11 @@
 #define SMARTPORT_ID_DIY_LAST      0x50ff  //We have 256 possible ID's for custom values :)
 #define SMARTPORT_ID_DIY_NAVSTATE  0x5000
 #define SMARTPORT_ID_DIY_GPSFIX    0x5001
+#define SMARTPORT_ID_DIY_Q0    	   0x5083
+#define SMARTPORT_ID_DIY_Q1    	   0x5084
+#define SMARTPORT_ID_DIY_Q2    	   0x5085
+#define SMARTPORT_ID_DIY_Q3    	   0x5086
+
 
 // Public functions
 bool sPort_init(void);
@@ -103,6 +108,13 @@ void sPort_send_GPS_CRS(int uart);
 void sPort_send_GPS_TIME(int uart);
 void sPort_send_flight_mode(int uart);
 void sPort_send_GPS_info(int uart);
+void sPort_send_ATT_Q0(int uart); // zt: added for attitude telemetry
+void sPort_send_ATT_Q1(int uart); // zt: added for attitude telemetry
+void sPort_send_ATT_Q2(int uart); // zt: added for attitude telemetry
+void sPort_send_ATT_Q3(int uart); // zt: added for attitude telemetry
+void sPort_send_ACCX(int uart);
+void sPort_send_ACCY(int uart);
+void sPort_send_ACCZ(int uart);
 
 void sPort_send_NAV_STATE(int uart);
 void sPort_send_GPS_FIX(int uart);

@@ -61,6 +61,8 @@
 #include <px4_platform_common/module.h>
 #include <px4_platform_common/getopt.h>
 #include <systemlib/err.h>
+#include <systemlib/mavlink_log.h>
+#include <uORB/topics/mavlink_log.h>
 #include <termios.h>
 #include <drivers/drv_hrt.h>
 #include <uORB/topics/vehicle_air_data.h>
@@ -78,6 +80,7 @@ static volatile bool thread_running = false;
 static int frsky_task;
 typedef enum { SCANNING, SPORT, SPORT_SINGLE_WIRE, SPORT_SINGLE_WIRE_INVERT, DTYPE } frsky_state_t;
 static frsky_state_t frsky_state = SCANNING;
+static orb_advert_t mavlink_log_pub = nullptr;
 
 static unsigned long int sentPackets = 0;
 /* Default values for arguments */
@@ -409,6 +412,8 @@ static int frsky_telemetry_thread_main(int argc, char *argv[])
 		uint32_t lastGPS_ms = 0;
 		uint32_t lastNAV_STATE_ms = 0;
 		uint32_t lastGPS_FIX_ms = 0;
+		uint32_t lastATT_ms = 0;
+		uint32_t lastACC_ms = 0;
 
 		/* send S.port telemetry */
 		while (!thread_should_exit) {
@@ -469,6 +474,7 @@ static int frsky_telemetry_thread_main(int argc, char *argv[])
 					/* send battery voltage */
 					sPort_send_BATV(uart);
 					sentPackets++;
+					//mavlink_log_warning(&mavlink_log_pub,"reporting battery voltage"); //zt
 				}
 
 				break;
@@ -512,16 +518,70 @@ static int frsky_telemetry_thread_main(int argc, char *argv[])
 
 				break;
 
+			// case SMARTPORT_POLL_5:
+
+			// 	/* report fuel at 1Hz */
+			// 	if (now_ms - lastFUEL_ms > 1000) {
+			// 		lastFUEL_ms = now_ms;
+			// 		/* send fuel */
+			// 		sPort_send_FUEL(uart);
+			// 		sentPackets++;
+			// 	}
+
+			// 	break;
+			// zt: modified to send attitude information
+			// case SMARTPORT_POLL_5:
+
+			// 	/* report attitude at 10Hz */
+			// 	if (now_ms - lastATT_ms > 100) {
+			// 		lastATT_ms = now_ms;
+			// 		/* send attitude */
+			// 		sPort_send_ATT(uart);
+			// 		sentPackets++;
+			// 	}
+
+			// 	break;
+
 			case SMARTPORT_POLL_5:
+				if(0) {mavlink_log_warning(&mavlink_log_pub,"reporting battery voltage");}
 
-				/* report fuel at 1Hz */
-				if (now_ms - lastFUEL_ms > 1000) {
-					lastFUEL_ms = now_ms;
-					/* send fuel */
-					sPort_send_FUEL(uart);
-					sentPackets++;
+							// 	/* report fuel at 1Hz */
+			 	if (now_ms - lastFUEL_ms > 1000) {
+			 		lastFUEL_ms = now_ms;
+			 		/* send fuel */
+			 		sPort_send_FUEL(uart);
+			 		sentPackets++;
+			 	}
+
+				/* report attitude quaternion data elements at 10Hz */
+				else if (now_ms - lastATT_ms > 100) {
+					static int quatCount = 0;
+
+					switch (quatCount) {
+
+					case 0:
+						sPort_send_ATT_Q0(uart);
+						quatCount++;
+						break;
+
+					case 1:
+						sPort_send_ATT_Q1(uart);
+						quatCount++;
+						break;
+
+					case 2:
+						sPort_send_ATT_Q2(uart);
+						quatCount++;
+						break;
+
+					case 3:
+						sPort_send_ATT_Q3(uart);
+						quatCount = 0;
+						sentPackets += quatCount;
+						break;
+					}
+
 				}
-
 				break;
 
 			case SMARTPORT_POLL_6:
@@ -538,6 +598,28 @@ static int frsky_telemetry_thread_main(int argc, char *argv[])
 
 					sPort_send_VSPD(uart, speed);
 					sentPackets++;
+				}
+				//zt: add acceleration
+				else if (now_ms - lastACC_ms > 33){
+					lastACC_ms = now_ms;
+					static int elementCountACC = 0;
+
+					switch (elementCountACC) {
+					case 0:
+						elementCountACC++;
+						sPort_send_ACCX(uart);
+						break;
+
+					case 1:
+						elementCountACC++;
+						sPort_send_ACCY(uart);
+						break;
+
+					case 2:
+						elementCountACC = 0;
+						sPort_send_ACCZ(uart);
+						break;
+					}
 				}
 
 				break;

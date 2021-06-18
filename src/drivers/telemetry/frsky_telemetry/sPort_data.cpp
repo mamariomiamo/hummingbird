@@ -59,6 +59,9 @@
 #include <uORB/topics/vehicle_local_position.h>
 #include <uORB/topics/vehicle_status.h>
 #include <uORB/topics/vehicle_gps_position.h>
+#include <uORB/topics/vehicle_attitude.h>
+#include <systemlib/mavlink_log.h>
+#include <uORB/topics/mavlink_log.h>
 
 #include <drivers/drv_hrt.h>
 
@@ -72,10 +75,11 @@ struct s_port_subscription_data_s {
 	uORB::SubscriptionData<vehicle_gps_position_s> vehicle_gps_position_sub{ORB_ID(vehicle_gps_position)};
 	uORB::SubscriptionData<vehicle_local_position_s> vehicle_local_position_sub{ORB_ID(vehicle_local_position)};
 	uORB::SubscriptionData<vehicle_status_s> vehicle_status_sub{ORB_ID(vehicle_status)};
+	uORB::SubscriptionData<vehicle_attitude_s> vehicle_attitude_sub{ORB_ID(vehicle_attitude)};
 };
 
 static struct s_port_subscription_data_s *s_port_subscription_data = nullptr;
-
+static orb_advert_t mavlink_log_pub = nullptr;
 
 /**
  * Initializes the uORB subscriptions.
@@ -108,6 +112,7 @@ void sPort_update_topics()
 	s_port_subscription_data->vehicle_gps_position_sub.update();
 	s_port_subscription_data->vehicle_local_position_sub.update();
 	s_port_subscription_data->vehicle_status_sub.update();
+	s_port_subscription_data->vehicle_attitude_sub.update(); //zt: added for attitude telemetry
 }
 
 static void update_crc(uint16_t *crc, unsigned char b)
@@ -226,6 +231,52 @@ void sPort_send_FUEL(int uart)
 	/* send data */
 	uint32_t fuel = (int)(100 * s_port_subscription_data->battery_status_sub.get().remaining);
 	sPort_send_data(uart, SMARTPORT_ID_FUEL, fuel);
+}
+
+// zt: attitude telemetry
+void sPort_send_ATT_Q0(int uart)
+{
+	uint32_t q0 = (int)(100000.0f* s_port_subscription_data->vehicle_attitude_sub.get().q[0]);
+	sPort_send_data(uart, SMARTPORT_ID_DIY_Q0, q0);
+}
+
+void sPort_send_ATT_Q1(int uart)
+{
+	uint32_t q1 = (int)(100000.0f* s_port_subscription_data->vehicle_attitude_sub.get().q[1]);
+	sPort_send_data(uart, SMARTPORT_ID_DIY_Q1, q1);
+}
+
+void sPort_send_ATT_Q2(int uart)
+{
+	uint32_t q2 = (int)(100000.0f* s_port_subscription_data->vehicle_attitude_sub.get().q[2]);
+	sPort_send_data(uart, SMARTPORT_ID_DIY_Q2, q2);
+}
+
+void sPort_send_ATT_Q3(int uart)
+{
+	uint32_t q3 = (int)(100000.0f* s_port_subscription_data->vehicle_attitude_sub.get().q[3]);
+	sPort_send_data(uart, SMARTPORT_ID_DIY_Q3, q3);
+}
+
+//TODO verify format
+void sPort_send_ACCX(int uart)
+{
+	/* send data. opentx expects acc values in g. */
+	sPort_send_data(uart, SMARTPORT_ID_ACCX, int(s_port_subscription_data->sensor_combined_sub.get().accelerometer_m_s2[0] * 1000.0f * (1 / 9.81f)));
+}
+
+//TODO verify format
+void sPort_send_ACCY(int uart)
+{
+	/* send data. opentx expects acc values in g. */
+	sPort_send_data(uart, SMARTPORT_ID_ACCY, int(s_port_subscription_data->sensor_combined_sub.get().accelerometer_m_s2[1] * 1000.0f * (1 / 9.81f)));
+}
+
+//TODO verify format
+void sPort_send_ACCZ(int uart)
+{
+	/* send data. opentx expects acc values in g. */
+	sPort_send_data(uart, SMARTPORT_ID_ACCZ, int(s_port_subscription_data->sensor_combined_sub.get().accelerometer_m_s2[2] * 1000.0f* (1 / 9.81f)));
 }
 
 void sPort_send_GPS_LON(int uart)
