@@ -46,7 +46,7 @@ px4_add_module(
 		sensors/vision.cpp
 		sensors/mocap.cpp
 		sensors/land.cpp
-		sensors/landing_target.cpp
+		#sensors/landing_target.cpp
 	DEPENDS
 		controllib
 		git_ecl

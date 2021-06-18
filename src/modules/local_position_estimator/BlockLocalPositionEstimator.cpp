@@ -488,10 +488,10 @@ void BlockLocalPositionEstimator::Run()
 
 	if (targetPositionUpdated) {
 		if (_sensorTimeout & SENSOR_LAND_TARGET) {
-			landingTargetInit();
+			//landingTargetInit();
 
 		} else {
-			landingTargetCorrect();
+			//landingTargetCorrect();
 		}
 	}
 
@@ -535,7 +535,7 @@ void BlockLocalPositionEstimator::checkTimeouts()
 	visionCheckTimeout();
 	mocapCheckTimeout();
 	landCheckTimeout();
-	landingTargetCheckTimeout();
+	//landingTargetCheckTimeout();
 }
 
 bool BlockLocalPositionEstimator::landed()

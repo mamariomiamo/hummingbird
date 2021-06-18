@@ -455,7 +455,7 @@ private:
 		(ParamFloat<px4::params::LPE_T_MAX_GRADE>) _param_lpe_t_max_grade,
 
 		(ParamFloat<px4::params::LPE_LT_COV>) _param_lpe_lt_cov,
-		(ParamInt<px4::params::LTEST_MODE>) _param_ltest_mode,
+		//(ParamInt<px4::params::LTEST_MODE>) _param_ltest_mode,
 
 		// init origin
 		(ParamInt<px4::params::LPE_FAKE_ORIGIN>) _param_lpe_fake_origin,
