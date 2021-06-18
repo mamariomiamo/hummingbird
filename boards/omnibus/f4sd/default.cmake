@@ -8,7 +8,7 @@ px4_add_board(
 	ROMFSROOT px4fmu_common
 	CONSTRAINED_FLASH
 	SERIAL_PORTS
-		TEL2:/dev/ttyS1
+		TEL2:/dev/ttyS1 #on uart4
 		URT6:/dev/ttyS2
 	DRIVERS
 		adc
@@ -20,13 +20,13 @@ px4_add_board(
 		#distance_sensor # all available distance sensor drivers
 		dshot
 		gps
-		imu/invensense/icm20602
+		#imu/invensense/icm20602
 		imu/invensense/mpu6000
 		#irlock
 		#lights/blinkm
 		lights/rgbled
 		#magnetometer # all available magnetometer drivers
-		magnetometer/hmc5883
+		#magnetometer/hmc5883
 		#mkblctrl
 		optical_flow/px4flow
 		osd
@@ -46,14 +46,14 @@ px4_add_board(
 		#camera_feedback
 		commander
 		dataman
-		ekf2
+		#ekf2
 		events
 		#fw_att_control
 		#fw_pos_control_l1
 		land_detector
 		#landing_target_estimator
 		load_mon
-		#local_position_estimator
+		local_position_estimator
 		logger
 		mavlink
 		mc_att_control
