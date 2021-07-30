@@ -8,12 +8,20 @@
 
 ### PX4 mixer logic can be found [here](https://docs.px4.io/master/en/concept/mixing.html).
 
+### Prepare your board
+Use betaflight configurator to flash the px4 [bootloader](https://github.com/mamariomiamo/hummingbird/blob/main/omnibusf4sd_bl_d52b70cb39.hex) on the board.
+You can also follow the official guide [here](https://docs.px4.io/master/en/flight_controller/omnibus_f4_sd.html#px4-bootloader-update).
+
 ### Setup quick guide:
 * Step 1: Clone this repo.
 * Step 2: run ``` git submodule update --init --recursive```.
 * Step 3: run ``` make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
 * Step 4: plug in the flight controller and flash the firmware.
 * Step 5: Download and flash the parameter file [here](https://github.com/mamariomiamo/hummingbird/blob/main/hummingbird.params).
+
+
+### Generic parameter files
+Generic param can be downloaded [here](https://github.com/mamariomiamo/hummingbird/blob/main/humming_generic.params), you will need to upload the param multiple times to write all parameters sucessfully.
 
 ### Wiring guide:
 * PWM1: Left motor
