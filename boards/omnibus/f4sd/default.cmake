@@ -8,6 +8,7 @@ px4_add_board(
 	ROMFSROOT px4fmu_common
 	CONSTRAINED_FLASH
 	SERIAL_PORTS
+		TEL1:/dev/ttyS0
 		TEL2:/dev/ttyS1 #on uart4
 		URT6:/dev/ttyS2
 	DRIVERS
@@ -20,7 +21,7 @@ px4_add_board(
 		#distance_sensor # all available distance sensor drivers
 		dshot
 		gps
-		#imu/invensense/icm20602
+		imu/invensense/mpu6500 #this is used by hobbywing nanof4
 		imu/invensense/mpu6000
 		#irlock
 		#lights/blinkm
@@ -34,7 +35,7 @@ px4_add_board(
 		#pwm_input
 		#pwm_out_sim
 		pwm_out
-		rc_input
+		rc_input #comment this if using crsf RC over MAVLINK
 		#tap_esc
 		#telemetry # all available telemetry drivers
 		telemetry/frsky_telemetry

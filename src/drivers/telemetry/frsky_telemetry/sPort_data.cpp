@@ -79,7 +79,7 @@ struct s_port_subscription_data_s {
 };
 
 static struct s_port_subscription_data_s *s_port_subscription_data = nullptr;
-static orb_advert_t mavlink_log_pub = nullptr;
+//static orb_advert_t mavlink_log_pub = nullptr;
 
 /**
  * Initializes the uORB subscriptions.

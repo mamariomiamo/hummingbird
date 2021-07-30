@@ -5,3 +5,5 @@
 
 # Start MAVLink on the USB port
 mavlink start -d /dev/ttyACM0
+# start mavlink on uart1 /dev/ttyS0 (ToDo: remove this as when configured in QGC, it is not needed.)
+# mavlink start -d /dev/ttyS0

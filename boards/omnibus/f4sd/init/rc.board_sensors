@@ -5,8 +5,9 @@
 
 adc start
 # start GPS on UART6
-gps start -d /dev/ttyS2
-
+#gps start -d /dev/ttyS2
+mpu6500 -R 6 -s start
+mpu6000 -R 6 -s start
 if ! mpu6000 -R 6 -s start
 then
 	# some boards such as the Hobbywing XRotor F4 G2 use the ICM-20602
