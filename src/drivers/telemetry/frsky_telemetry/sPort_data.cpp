@@ -79,7 +79,7 @@ struct s_port_subscription_data_s {
 };
 
 static struct s_port_subscription_data_s *s_port_subscription_data = nullptr;
-static orb_advert_t mavlink_log_pub = nullptr;
+//static orb_advert_t mavlink_log_pub = nullptr;
 
 /**
  * Initializes the uORB subscriptions.
@@ -178,8 +178,6 @@ void sPort_send_data(int uart, uint16_t id, uint32_t data)
 
 	sPort_send_byte(uart, 0xFF - crc);
 }
-
-
 // scaling correct with OpenTX 2.1.7
 void sPort_send_BATV(int uart)
 {

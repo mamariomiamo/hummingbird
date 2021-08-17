@@ -88,4 +88,5 @@ px4_add_romfs_files(
 	TF-AutoG2.main.mix
 	uuv_x.main.mix
 	hummingbird.main.mix
+	dragonfly.main.mix
 )
