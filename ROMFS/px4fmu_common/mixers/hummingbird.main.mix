@@ -1,0 +1,60 @@
+# HummingBird mixer for PX4FMU
+# hummingbird
+# 1-4 (main)
+# 5-8 (main)
+#=============================
+#<!-- This is a tailless FlowerFly Flapping Wing with Stroke Plane Modulation Control Mechanism equiped with Lisa/S 1.0 -->
+#<!-- The Tailless FlowerFly frame comes with 2 brushless motors for thrust and roll, and 2 servos for pitch and yaw -->
+
+#<!-- The motor and control servos configuration is the following:
+
+#      	     Top                     Top
+#             ^                       ^
+#             |                       |
+#                                     RM (rightmotor)
+#Y<  ____RM___oX___LM___     _________oY________  ->X
+#   |         |         |   |         |         |
+#   |  Right  |  Left   |   |  Back   |  Front  |
+#    \ Wings  |  Wings /     \ Wings  |  Wings /
+#     \_______|_______/       \_______|_______/
+#          RS|||LS (leftservo)        RS (rightservo)
+#            |||                      |
+#             |                       |
+#         ____|____               ____|____
+#             v                       v
+#             Z                       Z
+
+#    The Lisa/S is sideway installed and aligned with body frame. Platform flies vertically-->
+
+
+
+
+
+
+# Left mottor
+# ---------------------------------
+M: 2
+O:      10000  10000      0 -10000  10000
+S: 0 0  	0  	 7000         0  -10000  10000
+S: 0 3  	0   19000    -10000  -10000  10000
+
+# Right mottor
+# ---------------------------------
+M: 2
+O:      10000  10000      0 -10000  10000
+S: 0 0  -7000  	   0      0  -10000  10000
+S: 0 3  	0  20000   -10000  -10000  10000
+
+# Left servo
+# ------------------
+M: 2
+O:      10000  10000      0 -10000  10000
+S: 0 1   -10000   -10000      0 -10000  10000
+S: 0 2  10000   10000      0 -10000  10000
+
+# Right Servo
+# -----------------
+M: 2
+O:      10000  10000      0 -10000  10000
+S: 0 1   10000    10000      0 -10000  10000
+S: 0 2  10000   10000      0 -10000  10000
