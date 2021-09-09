@@ -1,5 +1,36 @@
 # PX4 Drone Autopilot
 
+### ----------------------Hummingbird README----------------------
+
+### Customized PX4 fimware for flapping wing based on v1.12.3.
+
+### Mixer file modified: [hummingbird.main.mix](https://github.com/mamariomiamo/hummingbird/blob/31c96af767b84c7bda9e45076743ee5a4e67f52f/ROMFS/px4fmu_common/mixers/hummingbird.main.mix).
+
+### PX4 mixer logic can be found [here](https://docs.px4.io/master/en/concept/mixing.html).
+
+### Prepare your board
+Use betaflight configurator to flash the px4 [bootloader](https://github.com/mamariomiamo/hummingbird/blob/main/omnibusf4sd_bl_d52b70cb39.hex) on the board.
+You can also follow the official guide [here](https://docs.px4.io/master/en/flight_controller/omnibus_f4_sd.html#px4-bootloader-update).
+
+### Setup quick guide:
+* Step 1: Clone this repo and git checkout omni-flap
+* Step 2: run ``` git submodule update --init --recursive```.
+* Step 3: run ``` make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
+* Step 4: plug in the flight controller and flash the firmware.
+* Step 5: Download and flash the parameter file [here](https://github.com/mamariomiamo/hummingbird/blob/main/hummingbird.params).
+
+
+### Generic parameter files
+Generic param can be downloaded [here](https://github.com/mamariomiamo/hummingbird/blob/main/humming_generic.params), you will need to upload the param multiple times to write all parameters sucessfully.
+
+### Wiring guide:
+* PWM1: Left motor
+* PWM2: Right motor
+* PWM3: Left servo
+* PWM4: Right servo
+
+
+### ----------------------Below are the same as official README----------------------
 [![Releases](https://img.shields.io/github/release/PX4/PX4-Autopilot.svg)](https://github.com/PX4/PX4-Autopilot/releases) [![DOI](https://zenodo.org/badge/22634/PX4/PX4-Autopilot.svg)](https://zenodo.org/badge/latestdoi/22634/PX4/PX4-Autopilot)
 
 [![Nuttx Targets](https://github.com/PX4/PX4-Autopilot/workflows/Nuttx%20Targets/badge.svg)](https://github.com/PX4/PX4-Autopilot/actions?query=workflow%3A%22Nuttx+Targets%22?branch=master) [![SITL Tests](https://github.com/PX4/PX4-Autopilot/workflows/SITL%20Tests/badge.svg?branch=master)](https://github.com/PX4/PX4-Autopilot/actions?query=workflow%3A%22SITL+Tests%22)
