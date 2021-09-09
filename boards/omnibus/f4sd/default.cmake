@@ -37,7 +37,7 @@ px4_add_board(
 		telemetry/frsky_telemetry
 	MODULES
 		#airspeed_selector
-		#attitude_estimator_q
+		attitude_estimator_q
 		battery_status
 		#camera_feedback
 		commander
