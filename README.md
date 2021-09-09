@@ -13,7 +13,7 @@ Use betaflight configurator to flash the px4 [bootloader](https://github.com/mam
 You can also follow the official guide [here](https://docs.px4.io/master/en/flight_controller/omnibus_f4_sd.html#px4-bootloader-update).
 
 ### Setup quick guide:
-* Step 1: Clone this repo and git checkout omni-flap
+* Step 1: Clone this repo and ```git checkout omni-flap```.
 * Step 2: run ``` git submodule update --init --recursive```.
 * Step 3: run ``` make omnibus_f4sd upload``` if using OmnibusF4 boards, check [here](https://docs.px4.io/master/en/dev_setup/building_px4.html#building-for-nuttx) if compiling for other boards.
 * Step 4: plug in the flight controller and flash the firmware.
