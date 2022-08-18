@@ -13,4 +13,4 @@ fi
 
 bmp280 -s start
 
-gps start -d /dev/ttyS2 -b 115200
+#gps start -d /dev/ttyS2 -b 115200

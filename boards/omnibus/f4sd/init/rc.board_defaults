@@ -10,13 +10,19 @@ param set-default CBRK_SUPPLY_CHK 894281
 param set-default CBRK_IO_SAFETY 22027
 param set-default CBRK_USB_CHK 197848
 
-# use the ekf2 estimator if there is external compass.
-# param set-default SYS_MC_EST_GROUP 2
+# use the ekf2 estimator if there is a baro.
+param set-default SYS_MC_EST_GROUP 2
+param set-default SYS_HAS_BARO 1
+param set-default EKF2_MAG_TYPE 5
+
+# if flapping wing, enable the following parameter to set board rotation
+# param set-default 18
+
 # param set-default SYS_HAS_MAG 1
 # param set-default MAV_0_CONFIG 101
 
 # use the Q attitude estimator, it works w/o mag or GPS.
-param set-default SYS_MC_EST_GROUP 3
+#param set-default SYS_MC_EST_GROUP 3
 param set-default ATT_ACC_COMP 0
 param set-default ATT_W_ACC 0.4000
 param set-default ATT_W_GYRO_BIAS 0.0000
