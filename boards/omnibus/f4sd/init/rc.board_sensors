@@ -14,3 +14,6 @@ then
 fi
 
 bmp280 -s start
+
+# Laser sensor
+vl53l1x start -X
